@@ -1,0 +1,45 @@
+  train: prepared 10/78 trips (4s)
+  train: prepared 20/78 trips (8s)
+  train: prepared 30/78 trips (13s)
+  train: prepared 40/78 trips (17s)
+  train: prepared 50/78 trips (24s)
+  train: prepared 60/78 trips (28s)
+  train: prepared 70/78 trips (35s)
+train prepared 41s
+tuning subset: 26 trips, 51682 observations
+decoder tuning done 86s | tune-subset classifier-only 0.9231, default HMM 0.9498, best HMM 0.9524
+{'alpha': 1.3728965104495345, 'beta': 12.585159945353542, 'uturn_pen': 11.391567023188763, 'switch_pen': 0.8045633630348208, 'floor': 18.646350073627048, 'gap_s': 30.0, 'normalize': True}
+  test tuned LightGBM: prepared 10/10 trips (6s)
+  test untuned LightGBM: prepared 10/10 trips (5s)
+                                    partition                                                   method    top1  top1_trip_mean  continuity  route_precision  route_recall  route_f1  route_connected
+0               train, out-of-fold (78 trips)         Classifier only (no-candidate points unassigned)  0.8966          0.9060      0.9720           0.9004        0.8875    0.8903           0.7795
+1               train, out-of-fold (78 trips)             Classifier only (no-candidate points filled)  0.8985          0.9072      0.9721           0.9004        0.8875    0.8903           0.7795
+2               train, out-of-fold (78 trips)            Classifier + HMM (default decoder parameters)  0.9269          0.9348      0.9949           0.9576        0.8957    0.9235           0.8850
+3               train, out-of-fold (78 trips)              Classifier + HMM (tuned decoder parameters)  0.9259          0.9360      0.9951           0.9603        0.8905    0.9221           0.8807
+4     student_test (10 trips), tuned LightGBM         Classifier only (no-candidate points unassigned)  0.9003          0.9123      0.9678           0.9155        0.8936    0.9024           0.7875
+5     student_test (10 trips), tuned LightGBM             Classifier only (no-candidate points filled)  0.9003          0.9123      0.9678           0.9155        0.8936    0.9024           0.7875
+6     student_test (10 trips), tuned LightGBM            Classifier + HMM (default decoder parameters)  0.9354          0.9436      0.9957           0.9707        0.9026    0.9338           0.8985
+7     student_test (10 trips), tuned LightGBM              Classifier + HMM (tuned decoder parameters)  0.9342          0.9427      0.9956           0.9734        0.8983    0.9327           0.8920
+8     student_test (10 trips), tuned LightGBM               Ablation: tuned HMM without U-turn penalty  0.9332          0.9414      0.9959           0.9709        0.8992    0.9322           0.9048
+9     student_test (10 trips), tuned LightGBM                  Ablation: tuned HMM without gap restart  0.9342          0.9427      0.9956           0.9734        0.8983    0.9327           0.8920
+10    student_test (10 trips), tuned LightGBM    Ablation: tuned HMM with raw (unnormalised) emissions  0.9342          0.9427      0.9956           0.9734        0.8983    0.9327           0.8920
+11    student_test (10 trips), tuned LightGBM  Ablation: tuned HMM with no switch/U-turn/floor shaping  0.9303          0.9392      0.9955           0.9671        0.9022    0.9319           0.9040
+12  student_test (10 trips), untuned LightGBM         Classifier only (no-candidate points unassigned)  0.9056          0.9165      0.9683           0.9200        0.8965    0.9063           0.7880
+13  student_test (10 trips), untuned LightGBM             Classifier only (no-candidate points filled)  0.9056          0.9165      0.9683           0.9200        0.8965    0.9063           0.7880
+14  student_test (10 trips), untuned LightGBM            Classifier + HMM (default decoder parameters)  0.9386          0.9452      0.9958           0.9720        0.9041    0.9353           0.8994
+15  student_test (10 trips), untuned LightGBM              Classifier + HMM (tuned decoder parameters)  0.9364          0.9442      0.9957           0.9732        0.8987    0.9328           0.8940
+       trip  n_obs  correct_clf  route_f1_clf  correct_hmm  route_f1_hmm  route_connected  top1_clf  top1_hmm  delta_top1
+0  00000000   2503         2388        0.9251         2402        0.9584           0.9392    0.9541    0.9596      0.0056
+1  00000007   1354         1273        0.9837         1347        0.9878           0.9917    0.9402    0.9948      0.0547
+2  00000009   1049          928        0.8606          960        0.8878           0.8418    0.8847    0.9152      0.0305
+3  00000040   2995         2863        0.9391         2929        0.9719           0.9302    0.9559    0.9780      0.0220
+4  00000052    262          256        0.8864          261        0.9205           0.8625    0.9771    0.9962      0.0191
+5  00000056   3958         3620        0.9113         3794        0.9339           0.8759    0.9146    0.9586      0.0440
+6  00000065    768          669        0.8920          681        0.9466           0.8963    0.8711    0.8867      0.0156
+7  00000076   1486         1382        0.8770         1436        0.9175           0.8768    0.9300    0.9664      0.0363
+8  00000077   3911         3076        0.9043         3273        0.9466           0.8571    0.7865    0.8369      0.0504
+9  00000091    874          794        0.8443          817        0.8564           0.8483    0.9085    0.9348      0.0263 
+                   wrong_direction  adjacent_arc  other
+classifier only               862           355    694
+classifier + HMM              626           316    318
+HMM DONE 108s

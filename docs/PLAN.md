@@ -35,3 +35,6 @@ For each GPS observation: generate candidate arcs near it -> score each candidat
 - Evaluator-test data never used for training/selection. Student_test is for development comparison only.
 - Fit scalers/imputers on train only. Group CV by trip (no trip split across folds).
 - Report real numbers only; every figure produced by the project code.
+
+## Status after Review 2
+All stages complete: Optuna tuning, HMM/Viterbi, FastAPI, UI, integration test on 10 trips, Folium maps, PDF report.

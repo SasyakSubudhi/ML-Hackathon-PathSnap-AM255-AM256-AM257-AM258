@@ -1,0 +1,30 @@
+{
+  "best_params": {
+    "n_estimators": 257,
+    "learning_rate": 0.02658482604694458,
+    "num_leaves": 124,
+    "max_depth": 14,
+    "min_child_samples": 13,
+    "subsample": 0.6724505811537502,
+    "colsample_bytree": 0.5664680416183663,
+    "reg_lambda": 0.001427485659384763,
+    "reg_alpha": 0.01498976419521397,
+    "subsample_freq": 1
+  },
+  "best_cv_macro_f1": 0.9430863605428933,
+  "n_trials": 25,
+  "n_complete": 21,
+  "n_pruned": 4,
+  "search_seconds": 687.4812664985657,
+  "sampler": "TPE (n_startup_trials=8, seed=42)",
+  "pruner": "MedianPruner",
+  "objective": "mean 3-fold GroupKFold CV macro-F1",
+  "untuned_params": {
+    "n_estimators": 300,
+    "learning_rate": 0.05,
+    "num_leaves": 63,
+    "subsample": 0.8,
+    "subsample_freq": 1,
+    "colsample_bytree": 0.8
+  }
+}

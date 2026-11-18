@@ -20,12 +20,13 @@ def _read(path, dtype):
     return pd.read_csv(path, sep=r"\s+", header=None, dtype=dtype).to_numpy()
 
 
-def load_trip(part, trip, root=DATA_ROOT_DEFAULT):
-    d = Path(root) / part / trip
+def load_trip(part, trip, root=DATA_ROOT_DEFAULT, with_route=True, trip_dir=None):
+    """with_route=False never opens the .route file (used by the prediction pipeline / API)."""
+    d = Path(trip_dir) if trip_dir is not None else Path(root) / part / trip
     track = _read(d / f"{trip}.track", np.float64)      # lon, lat, t(s)
     nodes = _read(d / f"{trip}.nodes", np.float64)      # lon, lat
     arcs = _read(d / f"{trip}.arcs", np.int64)          # from_node, to_node
-    route = _read(d / f"{trip}.route", np.int64).ravel()  # arc ids
+    route = _read(d / f"{trip}.route", np.int64).ravel() if with_route else np.zeros(0, np.int64)
     return dict(part=part, trip=trip, track=track, nodes=nodes, arcs=arcs, route=route)
 
 
@@ -140,8 +141,10 @@ def _wrap180(a):
     return (a + 180.0) % 360.0 - 180.0
 
 
-def build_trip_table(tr, radius=100.0, k_max=12):
-    """Full pipeline for one trip. Returns (candidate_table, observation_table)."""
+def build_trip_table(tr, radius=100.0, k_max=12, use_reference=True):
+    """Full pipeline for one trip. Returns (candidate_table, observation_table).
+    use_reference=False builds the identical features without touching the reference route
+    (labels are then all 0 and ref_arc = -1); this is the inference path used by the API."""
     tr = project_trip(tr)
     nxy, arcs, oxy, t = tr["node_xy"], tr["arcs"], tr["obs_xy"], tr["t"]
     n_obs, n_arc, n_node = len(oxy), len(arcs), len(nxy)
@@ -151,9 +154,12 @@ def build_trip_table(tr, radius=100.0, k_max=12):
     arc_bearing = np.degrees(np.arctan2(seg[:, 0], seg[:, 1])) % 360.0
 
     # --- reference label per observation (derived from supplied route)
-    route = tr["route"]
-    ridx, d_ref = align_route(oxy, p0[route], p1[route])
-    ref_arc = route[ridx]
+    if use_reference:
+        route = tr["route"]
+        ridx, d_ref = align_route(oxy, p0[route], p1[route])
+        ref_arc = route[ridx]
+    else:
+        ridx, d_ref, ref_arc = np.full(n_obs, -1, np.int64), np.full(n_obs, np.nan), np.full(n_obs, -1, np.int64)
 
     # --- observation-level kinematics (central difference, +-2 samples)
     i = np.arange(n_obs)

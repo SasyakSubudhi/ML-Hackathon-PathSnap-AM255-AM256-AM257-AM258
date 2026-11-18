@@ -1,0 +1,3 @@
+,wrong_direction,adjacent_arc,other
+classifier only,862,355,694
+classifier + HMM,626,316,318
