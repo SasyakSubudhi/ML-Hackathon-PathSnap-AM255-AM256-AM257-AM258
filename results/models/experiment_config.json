@@ -1,0 +1,51 @@
+{
+  "baseline_nearest_arc_student_test": {
+    "macro_f1": 0.7376729266067827,
+    "f1_pos": 0.5466279950876642,
+    "precision_pos": 0.48572163622330844,
+    "recall_pos": 0.09879127204227932,
+    "log_loss": NaN,
+    "top1_acc": 0.545929018789144,
+    "route_continuity": 0.9055793991416309,
+    "tn": 119732,
+    "fp": 1999,
+    "fn": 17223,
+    "tp": 1888
+  },
+  "seed": 42,
+  "max_train_rows_per_fit": 200000,
+  "cv_folds": 3,
+  "excluded_anomalous_train_trips": [
+    "00000033",
+    "00000054"
+  ],
+  "features": [
+    "d",
+    "rank_d",
+    "d_min",
+    "d_minus_min",
+    "d_ratio_min",
+    "n_cand",
+    "frac",
+    "arc_len",
+    "ang_diff",
+    "cos_diff",
+    "heading_valid",
+    "speed",
+    "dt_prev",
+    "dt_next",
+    "d_prev2",
+    "d_next2",
+    "d_prev5",
+    "d_next5",
+    "progress2",
+    "progress5",
+    "ctx_mean",
+    "ctx_minus_min",
+    "ctx_rank",
+    "to_outdeg",
+    "from_indeg",
+    "has_reverse"
+  ],
+  "candidate_radius_k": "radius_m=60.0\nk_max=10\n"
+}

@@ -1,0 +1,32 @@
+excluded anomalous trips: ['00000033', '00000054'] | fit trips: 78
+data ready 1s; train rows 1258661 (obs 183260) | test rows 140842 (obs 19160)
+BASELINE nearest-arc student_test: {'macro_f1': 0.7377, 'f1_pos': 0.5466, 'precision_pos': 0.4857, 'recall_pos': 0.0988, 'log_loss': nan, 'top1_acc': np.float64(0.5459), 'route_continuity': 0.9056}
+  M1_LogReg fold0: macroF1=0.9142 top1=0.8673
+  M1_LogReg fold1: macroF1=0.9175 top1=0.8914
+  M1_LogReg fold2: macroF1=0.8998 top1=0.8301
+M1_LogReg DONE 5s | test macroF1=0.9083 top1=0.8628 logloss=0.1074 cont=0.9607 fit=0.4s infer/1000obs=0.6ms
+  M2_GaussNB fold0: macroF1=0.8426 top1=0.8478
+  M2_GaussNB fold1: macroF1=0.8305 top1=0.8607
+  M2_GaussNB fold2: macroF1=0.8305 top1=0.8028
+M2_GaussNB DONE 3s | test macroF1=0.8346 top1=0.8328 logloss=0.7116 cont=0.9595 fit=0.0s infer/1000obs=1.0ms
+  M3_DecisionTree fold0: macroF1=0.9379 top1=0.8912
+  M3_DecisionTree fold1: macroF1=0.9471 top1=0.9120
+  M3_DecisionTree fold2: macroF1=0.9256 top1=0.8558
+M3_DecisionTree DONE 22s | test macroF1=0.9279 top1=0.8837 logloss=0.1054 cont=0.9604 fit=4.8s infer/1000obs=0.5ms
+  M4_RandomForest fold0: macroF1=0.9389 top1=0.8929
+  M4_RandomForest fold1: macroF1=0.9495 top1=0.9184
+  M4_RandomForest fold2: macroF1=0.9313 top1=0.8682
+M4_RandomForest DONE 70s | test macroF1=0.9321 top1=0.8926 logloss=0.0744 cont=0.9652 fit=16.0s infer/1000obs=11.5ms
+  M5_HistGB fold0: macroF1=0.9390 top1=0.8932
+  M5_HistGB fold1: macroF1=0.9499 top1=0.9168
+  M5_HistGB fold2: macroF1=0.9323 top1=0.8712
+M5_HistGB DONE 21s | test macroF1=0.9384 top1=0.9016 logloss=0.0711 cont=0.9665 fit=3.3s infer/1000obs=27.5ms
+  M6_LightGBM fold0: macroF1=0.9403 top1=0.8949
+  M6_LightGBM fold1: macroF1=0.9504 top1=0.9190
+  M6_LightGBM fold2: macroF1=0.9359 top1=0.8732
+M6_LightGBM DONE 38s | test macroF1=0.9407 top1=0.9098 logloss=0.0677 cont=0.9685 fit=7.3s infer/1000obs=64.5ms
+  M7_MLP fold0: macroF1=0.9360 top1=0.8899
+  M7_MLP fold1: macroF1=0.9437 top1=0.9126
+  M7_MLP fold2: macroF1=0.9292 top1=0.8699
+M7_MLP DONE 40s | test macroF1=0.9302 top1=0.8902 logloss=0.0794 cont=0.9660 fit=8.7s infer/1000obs=1.8ms
+ALL DONE 201s
